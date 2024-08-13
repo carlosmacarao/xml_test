@@ -1,0 +1,9 @@
+<!DOCTYPE restaurantes [
+  <!ELEMENT restaurantes (restaurante+)>
+  <!ELEMENT restaurante (endereco, cozinha, telefone)>
+  <!ATTLIST restaurante name CDATA #REQUIRED>
+  <!ELEMENT endereco (#PCDATA)>
+  <!ELEMENT cozinha (#PCDATA)>
+  <!ELEMENT telefone (#PCDATA)>
+]
+>
