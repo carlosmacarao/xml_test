@@ -1,9 +1,9 @@
-const canvas = document.getElementById('gameCanvas');
+const canvas = document.getElementById('telaJogo');
 const ctx = canvas.getContext('2d');
 
 const box = 20;
-let snake = [];
-snake[0] = { x: 9 * box, y: 10 * box };
+let cobra = [];
+cobra[0] = { x: 9 * box, y: 10 * box };
 
 let food = {
     x: Math.floor(Math.random() * 19 + 1) * box,
@@ -30,45 +30,45 @@ function setDirection(event) {
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = 0; i < snake.length; i++) {
+    for (let i = 0; i < cobra.length; i++) {
         ctx.fillStyle = (i === 0) ? 'green' : 'white';
-        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+        ctx.fillRect(cobra[i].x, cobra[i].y, box, box);
         ctx.strokeStyle = 'red';
-        ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+        ctx.strokeRect(cobra[i].x, cobra[i].y, box, box);
     }
 
     ctx.fillStyle = 'red';
     ctx.fillRect(food.x, food.y, box, box);
 
-    let snakeX = snake[0].x;
-    let snakeY = snake[0].y;
+    let cobraX = cobra[0].x;
+    let cobraY = cobra[0].y;
 
-    if (direction === 'LEFT') snakeX -= box;
-    if (direction === 'UP') snakeY -= box;
-    if (direction === 'RIGHT') snakeX += box;
-    if (direction === 'DOWN') snakeY += box;
+    if (direction === 'LEFT') cobraX -= box;
+    if (direction === 'UP') cobraY -= box;
+    if (direction === 'RIGHT') cobraX += box;
+    if (direction === 'DOWN') cobraY += box;
 
-    if (snakeX === food.x && snakeY === food.y) {
+    if (cobraX === food.x && cobraY === food.y) {
         score++;
         food = {
             x: Math.floor(Math.random() * 19 + 1) * box,
             y: Math.floor(Math.random() * 19 + 1) * box
         };
     } else {
-        snake.pop();
+        cobra.pop();
     }
 
     let newHead = {
-        x: snakeX,
-        y: snakeY
+        x: cobraX,
+        y: cobraY
     };
 
-    if (snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
+    if (cobraX < 0 || cobraX >= canvas.width || cobraY < 0 || cobraY >= canvas.height || collision(newHead, cobra)) {
         clearInterval(game);
         alert('Game Over! Sua pontuação foi: ' + score);
     }
 
-    snake.unshift(newHead);
+    cobra.unshift(newHead);
 }
 
 function collision(head, array) {
